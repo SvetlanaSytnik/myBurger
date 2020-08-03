@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import Button from '../../../components/UI/Button/Button';
 import classes from './ContactData.module.css';
 import axios from '../../../axios-orders';
@@ -125,7 +127,7 @@ class ContactData extends Component {
 			formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
 		}
 		const order = {
-			ingredients: this.props.ingredients,
+			ingredients: this.props.ing,
 			price: this.props.price,
 			orderData: formData
 		};
@@ -211,5 +213,13 @@ class ContactData extends Component {
 	}
 }
 
+const mapStateToProps = state => {
+	return {
+		ing: state.ingredients,
+		price: state.totalPrice
 
-export default ContactData;
+	}
+}
+
+
+export default connect(mapStateToProps)(ContactData);
